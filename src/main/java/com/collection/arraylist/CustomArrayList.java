@@ -100,22 +100,66 @@ public class CustomArrayList<T> implements CustomList<T>{
             return  false;
         }
 
+        int i;
+        for(i = 0; i < size; i++){
+
+            if(elementData[i] == null && element == null){
+                break;
+            }
+            if(elementData[i] != null && elementData[i].equals(element)){
+                break;
+            }
+        }
+
+        if(i < size){
+            shiftToLeft(i);
+            return true;
+        }
         return false;
     }
 
     @Override
+    public int indexOf(T elem) {
+
+        if(elem == null){
+            for(int i = 0; i < size; i++){
+                if(elementData[i] == null){
+                    return i;
+                }
+            }
+        }else {
+            for(int i = 0; i < size; i++){
+                if(elementData[i].equals(elem)){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+    @Override
     public boolean contains(T element) {
-        return false;
+
+        return indexOf(element) >= 0;
     }
 
     @Override
     public T set(int index, T element) {
-        return null;
+
+        if ((index < size) && (index >= 0)) {
+
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+
+        T oldElement = (T) elementData[index];
+        elementData[index] = element;
+        return oldElement;
     }
 
     @Override
     public void clear() {
 
+        elementData = new Object[10];
+        size = 0;
     }
 
     @Override
