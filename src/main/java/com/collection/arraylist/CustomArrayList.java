@@ -6,7 +6,6 @@ public class CustomArrayList<T> implements CustomList<T>{
 
     private static final int DEFAULT_CAPACITY = 16;
 
-    private static final int CUT_RATE = 4;
     private Object[] elementData;
     private int size = 0;
 
