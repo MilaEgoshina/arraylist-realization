@@ -4,54 +4,103 @@ import java.util.Comparator;
 
 public class CustomArrayList<T> implements CustomList<T>{
 
-
     private static final int DEFAULT_CAPACITY = 16;
 
     private static final int CUT_RATE = 4;
     private Object[] elementData;
-    private int size;
+    private int size = 0;
+
+    private int capacity = 0;
 
     public CustomArrayList(){
-        elementData = new Object[DEFAULT_CAPACITY];
-        size = 0;
+        capacity = DEFAULT_CAPACITY;
+        elementData = new Object[capacity];
     }
 
     public CustomArrayList(int capacity){
+
+        this.capacity = capacity;
         elementData = new Object[capacity];
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public T get(int index) {
-        return null;
+
+        if((index < size) && (index >= 0)){
+
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+        return (T) elementData[index];
     }
 
     @Override
     public boolean add(T element) {
-        return false;
+
+        if(size == elementData.length){
+            increaseCapacity();
+        }
+
+        elementData[size++] = element;
+        return true;
     }
 
     @Override
     public void add(int index, T element) {
+        if ((index < size) && (index >= 0)) {
 
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+        if(size == elementData.length){
+            increaseCapacity();
+        }
+        System.arraycopy(elementData,index,elementData,index + 1,size - index);
+        elementData[index] = element;
+        size++;
     }
 
+ /*   public void addAll(T[] elements) {
+        if (size + elements.length >= array.length) {
+            array = Arrays.copyOf(array, Math.max(array.length * 2, size + elements.length));
+        }
+        System.arraycopy(elements, 0, array, size, elements.length);
+        size += elements.length;
+    }*/
     @Override
     public boolean addAll(T[] elements) {
-        return false;
+
+        if(size + elements.length > elementData.length){
+            increaseCapacity(size + elements.length);
+        }
+
+        System.arraycopy(elements,0, elementData, size, elements.length);
+        size += elements.length;
+        return true;
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        if ((index < size) && (index >= 0)) {
+
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+        T removed = (T) elementData[index];
+        shiftToLeft(index);
+
+        return removed;
     }
 
     @Override
     public boolean remove(T element) {
+
+        if(size == 0){
+            return  false;
+        }
+
         return false;
     }
 
@@ -66,7 +115,38 @@ public class CustomArrayList<T> implements CustomList<T>{
     }
 
     @Override
+    public void clear() {
+
+    }
+
+    @Override
     public void sort(Comparator<? super T> comparator) {
 
+    }
+
+    private void increaseCapacity(){
+        int oldCapacity = elementData.length;
+        capacity = (oldCapacity * 3) / 2 + 1;
+        Object[] newArray = new Object[capacity];
+        System.arraycopy(elementData,0, newArray,0, size);
+        elementData = newArray;
+    }
+
+    private void increaseCapacity(int minCapacity){
+         capacity = Math.min(elementData.length * 2, minCapacity);
+         Object[] newArray = new Object[capacity];
+         System.arraycopy(elementData,0, newArray, 0, size);
+         elementData = newArray;
+    }
+
+    private void shiftToLeft(int start){
+
+        size--;
+
+        if(size <= 0) return;
+
+        if(size != start){
+            System.arraycopy(elementData, start + 1, elementData, start, size - start);
+        }
     }
 }
