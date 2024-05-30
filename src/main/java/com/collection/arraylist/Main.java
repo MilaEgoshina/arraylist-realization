@@ -1,19 +1,21 @@
 package com.collection.arraylist;
 
+import java.util.Comparator;
+
 public class Main {
 
     public static void main(String[] args) {
-        CustomArrayList<Integer> integerList = new CustomArrayList<>();
-        integerList.add(5);
-        integerList.add(2);
-        integerList.add(9);
-        integerList.add(1);
-        integerList.add(5);
 
-        System.out.println(integerList);
-        QuickSort<Integer> quickSort = new QuickSort<>();
-        quickSort.sort(integerList);
+        CustomArrayList<String> strList = new CustomArrayList<>();
+        strList.add("banana");
+        strList.add("apple");
+        strList.add("cherry");
+        strList.add("date");
+        strList.add("blueberry");
 
-        System.out.println("Sorted integer list: " + integerList);
+        Comparator<String> stringComparator = Comparator.naturalOrder();
+        QuickSort.sort(strList, stringComparator);
+
+        System.out.println("After sorting: " + strList);
     }
 }

@@ -1,26 +1,30 @@
 package com.collection.arraylist;
 
+import java.util.Comparator;
+
 public class QuickSort<T extends Comparable<T>> {
 
 
-    public void sort(CustomArrayList<T> arrayList){
+    public static <T> void sort(CustomArrayList<T> arrayList, Comparator<? super T> comparator){
 
         if(arrayList == null || arrayList.size() == 0){
             return;
         }
-        quickSort(arrayList,0,arrayList.size() - 1);
+        quickSort(arrayList,0,arrayList.size() - 1, comparator);
     }
 
-    private void quickSort(CustomArrayList<T> arrayList, int low, int high){
+    private static <T> void quickSort(CustomArrayList<T> arrayList, int low, int high,
+                                  Comparator<? super T> comparator){
         // if low is more than high, then the subarray contains one element or less and no sorting is required.
         if(low < high){
-            int pivotIndex = partition(arrayList,low,high);
-            quickSort(arrayList,low,pivotIndex - 1);
-            quickSort(arrayList,pivotIndex + 1, high);
+            int pivotIndex = partition(arrayList, low, high, comparator);
+            quickSort(arrayList,low,pivotIndex - 1, comparator);
+            quickSort(arrayList,pivotIndex + 1, high, comparator);
         }
     }
 
-    private int partition(CustomArrayList<T> arrayList, int low, int high){
+    private static <T> int partition(CustomArrayList<T> arrayList, int low, int high,
+                                     Comparator<? super T> comparator){
 
         int middle = low + (high - low) / 2;
         T pivot = arrayList.get(middle);
@@ -31,7 +35,7 @@ public class QuickSort<T extends Comparable<T>> {
 
         int i = low - 1;
         for(int j = low; j < high; j++){
-            if(arrayList.get(j).compareTo(pivot) <= 0){ // if current elem is higher or equal to pivot element, so we need
+            if(comparator.compare(arrayList.get(j), pivot) < 0){ // if current elem is higher or equal to pivot element, so we need
                 //to switch them
                 i++; // increase i pointer to determine where to put current element
                 T pi = arrayList.get(i);
