@@ -26,7 +26,4 @@ public interface CustomList<T> {
 
     void clear();
 
-    void sort(Comparator<? super T> comparator);
-
-
 }

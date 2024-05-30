@@ -30,7 +30,7 @@ public class CustomArrayList<T> implements CustomList<T>{
     @Override
     public T get(int index) {
 
-        if((index < size) && (index >= 0)){
+        if((index >= size) && (index < 0)){
 
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
@@ -50,7 +50,7 @@ public class CustomArrayList<T> implements CustomList<T>{
 
     @Override
     public void add(int index, T element) {
-        if ((index < size) && (index >= 0)) {
+        if ((index >= size) && (index < 0)) {
 
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
@@ -83,7 +83,7 @@ public class CustomArrayList<T> implements CustomList<T>{
 
     @Override
     public T remove(int index) {
-        if ((index < size) && (index >= 0)) {
+        if ((index >= size) && (index < 0)) {
 
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
@@ -145,7 +145,7 @@ public class CustomArrayList<T> implements CustomList<T>{
     @Override
     public T set(int index, T element) {
 
-        if ((index < size) && (index >= 0)) {
+        if ((index >= size) && (index < 0)) {
 
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
@@ -160,11 +160,6 @@ public class CustomArrayList<T> implements CustomList<T>{
 
         elementData = new Object[10];
         size = 0;
-    }
-
-    @Override
-    public void sort(Comparator<? super T> comparator) {
-
     }
 
     private void increaseCapacity(){
