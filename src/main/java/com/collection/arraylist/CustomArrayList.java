@@ -1,7 +1,5 @@
 package com.collection.arraylist;
 
-import java.util.Comparator;
-
 public class CustomArrayList<T> implements CustomList<T>{
 
     private static final int DEFAULT_CAPACITY = 16;
@@ -160,6 +158,20 @@ public class CustomArrayList<T> implements CustomList<T>{
 
         elementData = new Object[10];
         size = 0;
+    }
+
+    @Override
+    public String toString(){
+        if(size ==0){
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i < size - 1; i++){
+            sb.append(elementData[i]).append(", ");
+        }
+        sb.append(elementData[size - 1]).append("]");
+        return sb.toString();
     }
 
     private void increaseCapacity(){

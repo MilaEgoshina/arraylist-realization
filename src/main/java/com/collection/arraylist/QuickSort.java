@@ -24,22 +24,27 @@ public class QuickSort<T extends Comparable<T>> {
 
         int middle = low + (high - low) / 2;
         T pivot = arrayList.get(middle);
+
+        T temp = arrayList.get(middle);
+        arrayList.set(middle,arrayList.get(high));
+        arrayList.set(high,temp);
+
         int i = low - 1;
         for(int j = low; j < high; j++){
             if(arrayList.get(j).compareTo(pivot) <= 0){ // if current elem is higher or equal to pivot element, so we need
                 //to switch them
                 i++; // increase i pointer to determine where to put current element
-                T temp = arrayList.get(i);
+                T pi = arrayList.get(i);
                 arrayList.set(i,arrayList.get(j));
-                arrayList.set(j,temp);
+                arrayList.set(j,pi);
             }
         }
         //after the loop completes, all elements with lower values are collected to the left of the pivot.
         // index i point to the last from the first group of partition
         // we put pivot between two groups after the partition
-        T temp = arrayList.get(i + 1); // put the pivot in temp
+        T tempPivot = arrayList.get(i + 1); // put the pivot in temp
         arrayList.set(i + 1,arrayList.get(high));
-        arrayList.set(high,temp); // put the pivot on the i + 1 position
+        arrayList.set(high,tempPivot); // put the pivot on the i + 1 position
         // return index of the pivot after partition
         return i + 1;
     }

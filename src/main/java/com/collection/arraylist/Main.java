@@ -10,6 +10,7 @@ public class Main {
         integerList.add(1);
         integerList.add(5);
 
+        System.out.println(integerList);
         QuickSort<Integer> quickSort = new QuickSort<>();
         quickSort.sort(integerList);
 
