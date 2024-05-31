@@ -151,10 +151,10 @@ public class MyArrayList<E> implements CustomList<E>{
         }
     }
     private boolean checkIndex(int index){
-        if ((index < size) && (index >= 0)){
-            return true;
+        if ((index > size) && (index < 0)){
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
-        return false;
+        return true;
     }
     private void removeAtIndex(int index){
         for(int i = 0; i < size - 1; i ++){
