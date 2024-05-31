@@ -5,23 +5,19 @@ public class MyArrayList<E> implements CustomList<E>{
     private Object[] elementData;
     private int size = 0;
     private int capacity = 0;
-
     public MyArrayList(){
         capacity = DEFAULT_CAPACITY;
         elementData = new Object[capacity];
     }
-
     public MyArrayList(int capacity){
 
         this.capacity = capacity;
         elementData = new Object[capacity];
     }
-
     @Override
     public int size() {
         return size;
     }
-
     @Override
     public E get(int index) {
         if(checkIndex(index)){
@@ -29,7 +25,6 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return null;
     }
-
     @Override
     public boolean add(E element) {
 
@@ -54,7 +49,6 @@ public class MyArrayList<E> implements CustomList<E>{
         elementData[index] = element;
         size++;
     }
-
     @Override
     public boolean addAll(E[] elements) {
         if(elements == null)
@@ -67,7 +61,6 @@ public class MyArrayList<E> implements CustomList<E>{
 ;        }
         return true;
     }
-
     @Override
     public E remove(int index) {
         if(checkIndex(index)){
@@ -77,7 +70,6 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return null;
     }
-
     @Override
     public boolean remove(E element) {
         if(size == 0 )
@@ -96,12 +88,10 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return false;
     }
-
     @Override
     public boolean contains(E element) {
         return indexOf(element) >= 0;
     }
-
     @Override
     public E set(int index, E element) {
         if(checkIndex(index)){
@@ -148,7 +138,6 @@ public class MyArrayList<E> implements CustomList<E>{
         sb.append(elementData[size - 1]).append("]");
         return sb.toString();
     }
-
     public void ensureCapacity(int minCapacity) {
         int oldCapacity = elementData.length;
         if (minCapacity > oldCapacity) {
@@ -167,16 +156,6 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return false;
     }
-
-    private void shiftToLeft(int start){
-        size--;
-        if(size <= 0)
-            return;
-        if (size != start) {
-
-            System.arraycopy(elementData,start + 1, elementData,start, size - start);
-        }
-    }
     private void removeAtIndex(int index){
         for(int i = 0; i < size - 1; i ++){
             elementData[i] = elementData[i + 1];
@@ -184,5 +163,4 @@ public class MyArrayList<E> implements CustomList<E>{
         elementData[size - 1] = null;
         size--;
     }
-
 }
