@@ -36,18 +36,14 @@ public class MyArrayList<E> implements CustomList<E>{
     @Override
     public void add(int index, E element) {
 
-        if(index < 0){
-            return;
+        if(checkIndex(index)){
+
+            for(int i = size; i > index; i--){
+                elementData[i] = elementData[i - 1];
+            }
+            elementData[index] = element;
+            size++;
         }
-        ensureCapacity(size + 1);
-        if(index < size){
-            index = size;
-        }
-        for(int i = size; i >= index; i--){
-            elementData[i + 1] = elementData[i];
-        }
-        elementData[index] = element;
-        size++;
     }
     @Override
     public boolean addAll(E[] elements) {
@@ -63,29 +59,23 @@ public class MyArrayList<E> implements CustomList<E>{
     }
     @Override
     public E remove(int index) {
-        if(checkIndex(index)){
-            E removedElement = (E) elementData[index];
-            removeAtIndex(index);
-            return removedElement;
-        }
-        return null;
+        E removedElement = (E) elementData[index];
+        removeAtIndex(index);
+        return removedElement;
+
     }
     @Override
     public boolean remove(E element) {
         if(size == 0 )
             return false;
-        int i;
-        for(i = 0; i < size; i++){
-            if(elementData[i] == null && element == null){
-                break;
+        for(int i = 0; i < size; i++){
+
+            if(elementData[i].equals(element)){
+                removeAtIndex(i);
+                return true;
             }
-            if(elementData[i] != null && elementData.equals(elementData))
-                break;
         }
-        if(i < size){
-            removeAtIndex(i);
-            return true;
-        }
+
         return false;
     }
     @Override
@@ -150,17 +140,22 @@ public class MyArrayList<E> implements CustomList<E>{
             System.arraycopy(oldData, 0, elementData, 0, size);
         }
     }
-    private boolean checkIndex(int index){
+    boolean checkIndex(int index){
         if ((index >= size) && (index < 0)){
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
         return true;
     }
     private void removeAtIndex(int index){
-        for(int i = 0; i < size - 1; i ++){
-            elementData[i] = elementData[i + 1];
+
+        if(checkIndex(index)){
+
+            for(int i = index; i < size - 1; i ++){
+
+                elementData[i] = elementData[i + 1];
+            }
+            elementData[--size] = null;
         }
-        elementData[size - 1] = null;
-        size--;
+
     }
 }

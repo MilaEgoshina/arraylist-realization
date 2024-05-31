@@ -12,7 +12,7 @@ public class Main {
         strList.add("cherry");
         strList.add("date");
         strList.add("blueberry");
-
+        strList.add(2,"honey");
         System.out.println(strList);
         Comparator<String> stringComparator = Comparator.naturalOrder();
         QuickSort.sort(strList, stringComparator);
