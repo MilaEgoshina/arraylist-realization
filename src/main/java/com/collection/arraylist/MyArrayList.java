@@ -151,7 +151,7 @@ public class MyArrayList<E> implements CustomList<E>{
         }
     }
     private boolean checkIndex(int index){
-        if ((index > size) && (index < 0)){
+        if ((index >= size) && (index < 0)){
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
         return true;
