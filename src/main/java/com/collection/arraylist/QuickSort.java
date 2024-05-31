@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class QuickSort<T extends Comparable<T>> {
 
 
-    public static <T> void sort(CustomArrayList<T> arrayList, Comparator<? super T> comparator){
+    public static <T> void sort(MyArrayList<String> arrayList, Comparator<String> comparator){
 
         if(arrayList == null || arrayList.size() == 0){
             return;
@@ -13,7 +13,7 @@ public class QuickSort<T extends Comparable<T>> {
         quickSort(arrayList,0,arrayList.size() - 1, comparator);
     }
 
-    private static <T> void quickSort(CustomArrayList<T> arrayList, int low, int high,
+    private static <T> void quickSort(MyArrayList<T> arrayList, int low, int high,
                                   Comparator<? super T> comparator){
         // if low is more than high, then the subarray contains one element or less and no sorting is required.
         if(low < high){
@@ -23,7 +23,7 @@ public class QuickSort<T extends Comparable<T>> {
         }
     }
 
-    private static <T> int partition(CustomArrayList<T> arrayList, int low, int high,
+    private static <T> int partition(MyArrayList<T> arrayList, int low, int high,
                                      Comparator<? super T> comparator){
 
         int middle = low + (high - low) / 2;

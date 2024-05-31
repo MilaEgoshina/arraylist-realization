@@ -57,37 +57,96 @@ public class MyArrayList<E> implements CustomList<E>{
 
     @Override
     public boolean addAll(E[] elements) {
-        return false;
+        if(elements == null)
+            return false;
+        if(size + elements.length > elementData.length){
+            ensureCapacity(size + elements.length);
+        }
+        for(E elem : elements){
+            elementData[size++] = elem;
+;        }
+        return true;
     }
 
     @Override
     public E remove(int index) {
+        if(checkIndex(index)){
+            E removedElement = (E) elementData[index];
+            removeAtIndex(index);
+            return removedElement;
+        }
         return null;
     }
 
     @Override
     public boolean remove(E element) {
+        if(size == 0 )
+            return false;
+        int i;
+        for(i = 0; i < size; i++){
+            if(elementData[i] == null && element == null){
+                break;
+            }
+            if(elementData[i] != null && elementData.equals(elementData))
+                break;
+        }
+        if(i < size){
+            removeAtIndex(i);
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean contains(E element) {
-        return false;
+        return indexOf(element) >= 0;
     }
 
     @Override
     public E set(int index, E element) {
+        if(checkIndex(index)){
+
+            E oldElement = (E) elementData[index];
+            elementData[index] = element;
+            return oldElement;
+        }
         return null;
     }
 
     @Override
     public int indexOf(E elem) {
-        return 0;
+        if(elem == null){
+            for(int i = 0; i < size; i++){
+                if(elementData[i] == null){
+                    return i;
+                }
+            }
+        }else {
+            for(int i = 0; i < size; i++){
+                if(elementData[i].equals(elem)){
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
-
     @Override
     public void clear() {
-
+        elementData = new Object[10];
+        size = 0;
+    }
+    @Override
+    public String toString(){
+        if(size ==0){
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i < size - 1; i++){
+            sb.append(elementData[i]).append(", ");
+        }
+        sb.append(elementData[size - 1]).append("]");
+        return sb.toString();
     }
 
     public void ensureCapacity(int minCapacity) {
@@ -109,5 +168,21 @@ public class MyArrayList<E> implements CustomList<E>{
         return false;
     }
 
+    private void shiftToLeft(int start){
+        size--;
+        if(size <= 0)
+            return;
+        if (size != start) {
+
+            System.arraycopy(elementData,start + 1, elementData,start, size - start);
+        }
+    }
+    private void removeAtIndex(int index){
+        for(int i = 0; i < size - 1; i ++){
+            elementData[i] = elementData[i + 1];
+        }
+        elementData[size - 1] = null;
+        size--;
+    }
 
 }

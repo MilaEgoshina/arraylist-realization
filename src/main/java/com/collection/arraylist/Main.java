@@ -6,13 +6,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CustomArrayList<String> strList = new CustomArrayList<>();
+        MyArrayList<String> strList = new MyArrayList<>();
         strList.add("banana");
         strList.add("apple");
         strList.add("cherry");
         strList.add("date");
         strList.add("blueberry");
 
+        System.out.println(strList);
         Comparator<String> stringComparator = Comparator.naturalOrder();
         QuickSort.sort(strList, stringComparator);
 
