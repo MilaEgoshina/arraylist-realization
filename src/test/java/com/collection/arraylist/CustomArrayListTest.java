@@ -222,9 +222,6 @@ public class CustomArrayListTest {
         customArrayList.add(5);
         customArrayList.add(10);
 
-        //When
-
-
         //Then
         assertEquals(10, customArrayList.set(1, 15));
     }
