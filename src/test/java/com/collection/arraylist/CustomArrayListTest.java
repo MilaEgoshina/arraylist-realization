@@ -222,8 +222,11 @@ public class CustomArrayListTest {
         customArrayList.add(5);
         customArrayList.add(10);
 
+        //When
+        int checkInt = customArrayList.set(1,15);
+
         //Then
-        assertEquals(10, customArrayList.set(1, 15));
+        assertEquals(10, checkInt);
     }
 
     @Test
