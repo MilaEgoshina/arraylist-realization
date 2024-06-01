@@ -1,6 +1,5 @@
 package com.collection.arraylist;
 
-import junit.framework.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ public class CustomArrayListTest {
 
     @Test
     public void givenEmptyListWhenSizeIsZeroThenReturnZero(){
-        Assert.assertEquals(0, customArrayList.size());
+        assertEquals(0, customArrayList.size());
     }
 
     @Test
@@ -32,7 +31,7 @@ public class CustomArrayListTest {
         int size = customArrayList.size();
 
         //Then
-        Assert.assertEquals(3,size);
+        assertEquals(3,size);
     }
 
     @Test
@@ -45,7 +44,7 @@ public class CustomArrayListTest {
         int element = customArrayList.get(1);
 
         // Then
-        Assert.assertEquals(10, element);
+        assertEquals(10, element);
     }
 
     @Test
@@ -58,7 +57,7 @@ public class CustomArrayListTest {
         Integer element = customArrayList.get(2);
 
         // Then
-        Assert.assertNull(element);
+        assertNull(element);
     }
     @Test
     public void givenList_whenAddElement_thenTrue() {
@@ -69,21 +68,7 @@ public class CustomArrayListTest {
         boolean result = list.add(5);
 
         // Then
-        Assert.assertTrue(result);
-    }
-
-    @Test
-    public void givenListWithElements_whenGetValidIndex_thenCorrectElement() {
-
-        //Given
-        customArrayList.add(5);
-        customArrayList.add(10);
-
-        // When
-        int checkInt = customArrayList.get(1);
-
-        //Then
-        Assert.assertEquals(10, checkInt);
+        assertTrue(result);
     }
 
     @Test
@@ -97,7 +82,7 @@ public class CustomArrayListTest {
         boolean isContain = customArrayList.contains(5);
 
         //Then
-        Assert.assertTrue(isContain);
+        assertTrue(isContain);
     }
 
     @Test
@@ -112,7 +97,7 @@ public class CustomArrayListTest {
         int size = customArrayList.size();
 
         //Then
-        Assert.assertEquals(4, customArrayList.size());
+        assertEquals(4, size);
     }
 
     @Test
@@ -127,18 +112,59 @@ public class CustomArrayListTest {
         int checkElem = customArrayList.get(1);
 
         //Then
-        Assert.assertEquals(7, checkElem);
+        assertEquals(7, checkElem);
     }
+
+    @Test
+    public void givenList_whenAddElementAtSpecificIndex_thenReturnCorrectListSize(){
+
+        //Given
+        customArrayList.add(0,1);
+        customArrayList.add(1,45);
+        customArrayList.add(2,56);
+        customArrayList.add(3,21);
+
+        //When
+        int size = customArrayList.size();
+
+        //Then
+        assertEquals(4, size);
+    }
+    @Test
+    public void givenList_whenAddNullElement_thenIllegalArgumentExceptionThrown() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            customArrayList.add(4);
+            customArrayList.add(2);
+            customArrayList.add(null);
+        });
+    }
+
     @Test
     public void givenList_whenAddElementAtIndexIsLessThanZero_thenReturnInvalidIndex(){
 
-        try {
+        customArrayList.add(0,13);
+        customArrayList.add(1,4);
+
+        IndexOutOfBoundsException exception = assertThrows(IndexOutOfBoundsException.class, () -> {
             customArrayList.add(-1,14);
-            fail("Expected IndexOutOfBoundsException to be thrown");
-        }catch (IndexOutOfBoundsException e){
-            Assert.assertEquals("Index -1 out of bounds for length 16", e.getMessage());
-        }
+        });
+
+        String expectedMessage = "Index: -1, Size 2";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
+    @Test
+    public void givenList_whenAddElementAtSpecificIndexIsMoreThanSize_thenIndexOutOfBoundsExceptionThrown(){
+
+        customArrayList.add(0, 1);
+        customArrayList.add(1, 2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            customArrayList.add(3, 3);
+        });
+    }
+
     @Test
     public void givenList_whenRemoveElement_thenElementRemoved() {
 
@@ -166,7 +192,7 @@ public class CustomArrayListTest {
         int sizeAfterRemove = customArrayList.size();
 
         //Then
-        Assert.assertEquals(2, customArrayList);
+        assertEquals(2, sizeAfterRemove);
     }
 
     @Test
@@ -180,7 +206,7 @@ public class CustomArrayListTest {
         Integer checkInt = 6;
 
         //Then
-        Assert.assertFalse(customArrayList.remove(checkInt));
+        assertFalse(customArrayList.remove(checkInt));
     }
 
     @Test
@@ -196,7 +222,7 @@ public class CustomArrayListTest {
         Integer checkInt = 10;
 
         //Then
-        Assert.assertTrue(customArrayList.remove(checkInt));
+        assertTrue(customArrayList.remove(checkInt));
     }
 
     @Test

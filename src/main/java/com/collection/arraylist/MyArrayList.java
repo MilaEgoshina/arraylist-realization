@@ -3,11 +3,12 @@ package com.collection.arraylist;
 public class MyArrayList<E> implements CustomList<E>{
     private static final int DEFAULT_CAPACITY = 16;
     private Object[] elementData;
-    private int size = 0;
+    private int size;
     private int capacity = 0;
     public MyArrayList(){
         capacity = DEFAULT_CAPACITY;
         elementData = new Object[capacity];
+        size = 0;
     }
     public MyArrayList(int capacity){
 
@@ -28,21 +29,29 @@ public class MyArrayList<E> implements CustomList<E>{
     @Override
     public boolean add(E element) {
 
-        ensureCapacity(size + 1);
-        elementData[size++] = element;
-        return true;
+        if(isValidElement(element)){
+            ensureCapacity(size + 1);
+            elementData[size++] = element;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void add(int index, E element) {
 
-        if(checkIndex(index)){
+        if(checkIndex(index) && isValidElement(element)){
 
-            for(int i = size; i > index; i--){
-                elementData[i] = elementData[i - 1];
+            ensureCapacity(size + 1);
+            if(index == size){
+                elementData[size] = element;
+            }else{
+                for(int i = size; i >= index; i--){
+                    elementData[i] = elementData[i - 1];
+                }
+                elementData[index] = element;
             }
-            elementData[index] = element;
-            size++;
+           size++;
         }
     }
     @Override
@@ -95,17 +104,10 @@ public class MyArrayList<E> implements CustomList<E>{
 
     @Override
     public int indexOf(E elem) {
-        if(elem == null){
-            for(int i = 0; i < size; i++){
-                if(elementData[i] == null){
-                    return i;
-                }
-            }
-        }else {
-            for(int i = 0; i < size; i++){
-                if(elementData[i].equals(elem)){
-                    return i;
-                }
+
+        for(int i = 0; i < size; i++){
+            if(elementData[i].equals(elem)){
+                return i;
             }
         }
         return -1;
@@ -141,21 +143,25 @@ public class MyArrayList<E> implements CustomList<E>{
         }
     }
     boolean checkIndex(int index){
-        if ((index >= size) && (index < 0)){
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        if ((index > size) || (index < 0)){
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);
         }
         return true;
     }
     private void removeAtIndex(int index){
 
         if(checkIndex(index)){
-
             for(int i = index; i < size - 1; i ++){
 
                 elementData[i] = elementData[i + 1];
             }
             elementData[--size] = null;
         }
-
+    }
+    private boolean isValidElement(E element){
+        if(element == null){
+            throw new IllegalArgumentException("Null elements are not allowed");
+        }
+        return true;
     }
 }
