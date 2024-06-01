@@ -1,10 +1,13 @@
 package com.collection.arraylist;
 
+import lombok.Getter;
+
+@Getter
 public class MyArrayList<E> implements CustomList<E>{
     private static final int DEFAULT_CAPACITY = 16;
     private Object[] elementData;
     private int size;
-    private int capacity = 0;
+    private int capacity;
     public MyArrayList(){
         capacity = DEFAULT_CAPACITY;
         elementData = new Object[capacity];
@@ -41,7 +44,6 @@ public class MyArrayList<E> implements CustomList<E>{
     public void add(int index, E element) {
 
         if(checkIndex(index) && isValidElement(element)){
-
             ensureCapacity(size + 1);
             if(index == size){
                 elementData[size] = element;
@@ -66,25 +68,27 @@ public class MyArrayList<E> implements CustomList<E>{
 ;        }
         return true;
     }
+
     @Override
     public E remove(int index) {
         E removedElement = (E) elementData[index];
         removeAtIndex(index);
         return removedElement;
-
     }
+
     @Override
     public boolean remove(E element) {
         if(size == 0 )
             return false;
-        for(int i = 0; i < size; i++){
+        if (isValidElement(element)) {
+            for(int i = 0; i < size; i++){
 
-            if(elementData[i].equals(element)){
-                removeAtIndex(i);
-                return true;
+                if(elementData[i].equals(element)){
+                    removeAtIndex(i);
+                    return true;
+                }
             }
         }
-
         return false;
     }
     @Override
@@ -93,7 +97,7 @@ public class MyArrayList<E> implements CustomList<E>{
     }
     @Override
     public E set(int index, E element) {
-        if(checkIndex(index)){
+        if(checkIndex(index) && isValidElement(element)){
 
             E oldElement = (E) elementData[index];
             elementData[index] = element;
@@ -137,12 +141,11 @@ public class MyArrayList<E> implements CustomList<E>{
             capacity = (oldCapacity * 3) / 2 + 1;
             if (capacity < minCapacity)
                 capacity = minCapacity;
-
             elementData = (E[]) new Object[capacity];
             System.arraycopy(oldData, 0, elementData, 0, size);
         }
     }
-    boolean checkIndex(int index){
+    private boolean checkIndex(int index){
         if ((index > size) || (index < 0)){
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);
         }

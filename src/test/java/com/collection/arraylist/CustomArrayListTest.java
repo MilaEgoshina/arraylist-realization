@@ -194,6 +194,26 @@ public class CustomArrayListTest {
         //Then
         assertEquals(2, sizeAfterRemove);
     }
+    @Test
+    void givenList_whenRemoveElementAtSpecificIndexIsMoreThanSize_thenIndexOutOfBoundsExceptionThrown() {
+
+        customArrayList.add(1);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            customArrayList.remove(-1);
+        });
+    }
+
+    @Test
+    void givenList_whenRemoveElementAtSpecificIndexIsLessThanZero_thenIndexOutOfBoundsExceptionThrown() {
+
+        customArrayList.add(8);
+        customArrayList.add(57);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            customArrayList.remove(3);
+        });
+    }
 
     @Test
     public void givenList_whenRemoveElementNotInList_thenFalse() {
@@ -203,10 +223,10 @@ public class CustomArrayListTest {
         customArrayList.add(10);
 
         //When
-        Integer checkInt = 6;
+        Integer removedElem = 6;
 
         //Then
-        assertFalse(customArrayList.remove(checkInt));
+        assertFalse(customArrayList.remove(removedElem));
     }
 
     @Test
@@ -219,10 +239,10 @@ public class CustomArrayListTest {
         customArrayList.add(56);
 
         //When
-        Integer checkInt = 10;
+        Integer removedElem = 10;
 
         //Then
-        assertTrue(customArrayList.remove(checkInt));
+        assertTrue(customArrayList.remove(removedElem));
     }
 
     @Test
@@ -235,10 +255,34 @@ public class CustomArrayListTest {
         customArrayList.add(56);
 
         //When
-        customArrayList.remove(5);
+        Integer removedElem = 5;
+        customArrayList.remove(removedElem);
 
         //Then
         assertEquals(3, customArrayList.size());
+    }
+
+    @Test
+    public void  givenList_whenRemoveElementByValueAndClearList_thenReturnFalse() {
+
+        //Given
+        Integer elemToRemoved = 90;
+        customArrayList.add(8);
+        customArrayList.add(15);
+
+        //When
+        customArrayList.clear();
+
+        assertFalse(customArrayList.remove(elemToRemoved));
+    }
+
+    @Test
+    public void  givenList_whenRemoveElementValueIsNull_thenIllegalArgumentExceptionThrows() {
+
+        customArrayList.add(8);
+        customArrayList.add(15);
+
+        assertThrows(IllegalArgumentException.class, () -> customArrayList.remove(null));
     }
 
     @Test
@@ -249,21 +293,49 @@ public class CustomArrayListTest {
         customArrayList.add(10);
 
         //When
-        int checkInt = customArrayList.set(1,15);
+        int oldElem = customArrayList.set(1,15);
 
         //Then
-        assertEquals(10, checkInt);
+        assertEquals(10, oldElem);
     }
 
     @Test
     public void givenList_whenSetElementAtInvalidIndex_thenNull() {
         customArrayList.add(5);
         customArrayList.add(10);
+
         assertNull(customArrayList.set(2, 15));
+    }
+    @Test
+    void givenList_whenSetElementAtIndexIsLessThanZero_thenIndexOutOfBoundsExceptionThrows() {
+        customArrayList.add(1);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            customArrayList.set(-1, 2);
+        });
     }
 
     @Test
-    public void givenList_whenIndexOfElementIncustomArrayList_thenCorrectIndex() {
+    void givenList_whenSetElementAtIndexIsMoreThanSize_thenIndexOutOfBoundsExceptionThrows() {
+
+        customArrayList.add(1);
+        customArrayList.add(2);
+        customArrayList.add(3);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            customArrayList.set(4, 10);
+        });
+    }
+
+    @Test
+    void givenList_whenSetNullElementAtIndex_thenIllegalArgumentExceptionThrows() {
+
+        customArrayList.add(1);
+        assertThrows(IllegalArgumentException.class, () -> {
+            customArrayList.set(0, null);
+        });
+    }
+    @Test
+    public void givenList_whenIndexOfElementInList_thenCorrectIndex() {
         customArrayList.add(5);
         customArrayList.add(10);
         assertEquals(0, customArrayList.indexOf(5));
@@ -274,15 +346,6 @@ public class CustomArrayListTest {
         customArrayList.add(5);
         customArrayList.add(10);
         assertEquals(-1, customArrayList.indexOf(15));
-    }
-
-    @Test
-    public void givenList_whenEnsureCapacity_thenCapacityIncreased() {
-
-        customArrayList.add(5);
-        customArrayList.add(10);
-        customArrayList.ensureCapacity(3);
-        assertEquals(3, customArrayList.size());
     }
 
     @Test
@@ -317,9 +380,4 @@ public class CustomArrayListTest {
         assertEquals(3, list.size());
     }
 
-    @Test
-    public void givenList_whenCheckIndexOutOfBounds_thenExceptionThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () ->  customArrayList.checkIndex(-1));
-        assertThrows(IndexOutOfBoundsException.class, () -> customArrayList.checkIndex(1));
-    }
 }
