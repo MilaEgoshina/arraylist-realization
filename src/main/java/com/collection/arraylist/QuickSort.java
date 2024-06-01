@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 public class QuickSort<T extends Comparable<T>> {
 
-
     public static <T> void sort(MyArrayList<String> arrayList, Comparator<String> comparator){
 
         if(arrayList == null || arrayList.size() == 0){
