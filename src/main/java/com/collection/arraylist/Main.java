@@ -6,19 +6,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        MyArrayList<String> strList = new MyArrayList<>();
-        strList.add("banana");
-        strList.add("apple");
-        strList.add("cherry");
-        strList.add("date");
-        strList.add("blueberry");
-        strList.add(1,"bee");
-        strList.add(2,"bee");
-        strList.add(8,"sss");
-        strList.remove("apple");
+        MyArrayList<Integer> strList = new MyArrayList<>();
+        strList.add(1);
+        strList.add(2);
+        strList.add(3);
+        strList.add(4);
+        strList.add(5);
+        strList.add(1,7);
+        strList.add(2,9);
+        Integer integer = 15;
+        strList.remove(integer);
         System.out.println(strList.size());
         System.out.println(strList);
-        Comparator<String> stringComparator = Comparator.naturalOrder();
+        Comparator<Integer> stringComparator = Comparator.naturalOrder();
         QuickSort.sort(strList, stringComparator);
 
 

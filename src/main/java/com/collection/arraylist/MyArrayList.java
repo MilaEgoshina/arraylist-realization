@@ -2,26 +2,56 @@ package com.collection.arraylist;
 
 import lombok.Getter;
 
+/**
+ * This class represents a custom implementation of a dynamic array list data structure.
+ * It implements the CustomList interface and provides methods to add, remove, get elements, and more.
+ * The list automatically expands in capacity when needed to accommodate additional elements.
+ *
+ * @param <E> the type of elements stored in the list
+ */
 @Getter
 public class MyArrayList<E> implements CustomList<E>{
     private static final int DEFAULT_CAPACITY = 16;
     private Object[] elementData;
     private int size;
     private int capacity;
+
+    /**
+     * Constructs an instance of MyArrayList with the default capacity.
+     */
     public MyArrayList(){
         capacity = DEFAULT_CAPACITY;
         elementData = new Object[capacity];
         size = 0;
     }
+
+    /**
+     * Constructs an instance of MyArrayList with the specified capacity.
+     *
+     * @param capacity the initial capacity of the list
+     */
     public MyArrayList(int capacity){
 
         this.capacity = capacity;
         elementData = new Object[capacity];
     }
+
+    /**
+     * Returns the number of elements in the list.
+     *
+     * @return size - the number of elements in the list
+     */
     @Override
     public int size() {
         return size;
     }
+
+    /**
+     * Method to get the element at the specified index in the list.
+     *
+     * @param index the index of the element to retrieve
+     * @return the element at the specified index
+     */
     @Override
     public E get(int index) {
         if(checkIndex(index)){
@@ -29,6 +59,13 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return null;
     }
+
+    /**
+     * Method to add the specified element to the end of the list.
+     *
+     * @param element the element to be added
+     * @return true if the element was successfully added, false otherwise
+     */
     @Override
     public boolean add(E element) {
 
@@ -40,6 +77,12 @@ public class MyArrayList<E> implements CustomList<E>{
         return false;
     }
 
+    /**
+     * Method to insert the specified element at the specified index in the list.
+     *
+     * @param index the index at which to insert the element
+     * @param element the element to insert in the list
+     */
     @Override
     public void add(int index, E element) {
 
@@ -56,6 +99,13 @@ public class MyArrayList<E> implements CustomList<E>{
            size++;
         }
     }
+
+    /**
+     * Method to add all the elements in the specified array to the end of the list.
+     *
+     * @param elements an array of elements to be added
+     * @return true if all elements were successfully added, false otherwise
+     */
     @Override
     public boolean addAll(E[] elements) {
         if(elements == null)
@@ -69,6 +119,12 @@ public class MyArrayList<E> implements CustomList<E>{
         return true;
     }
 
+    /**
+     * Method to remove the element at the specified index from the list.
+     *
+     * @param index the index of the element to remove
+     * @return the removed element
+     */
     @Override
     public E remove(int index) {
         E removedElement = (E) elementData[index];
@@ -76,6 +132,12 @@ public class MyArrayList<E> implements CustomList<E>{
         return removedElement;
     }
 
+    /**
+     * Method to remove the first occurrence of the specified element from the list.
+     *
+     * @param element the element to be removed
+     * @return true if the element was found and removed, false otherwise
+     */
     @Override
     public boolean remove(E element) {
         if(size == 0 )
@@ -91,10 +153,25 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return false;
     }
+
+    /**
+     * Method to check if the list contains the specified element.
+     *
+     * @param element the element to check for
+     * @return true if the element is found in the list, false otherwise
+     */
     @Override
     public boolean contains(E element) {
         return indexOf(element) >= 0;
     }
+
+    /**
+     * Method to replace the element at the specified index with the specified element.
+     *
+     * @param index the index of the element to replace
+     * @param element the new element to set
+     * @return the old element at the specified index
+     */
     @Override
     public E set(int index, E element) {
         if(checkIndex(index) && isValidElement(element)){
@@ -105,7 +182,6 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return null;
     }
-
     @Override
     public int indexOf(E elem) {
 

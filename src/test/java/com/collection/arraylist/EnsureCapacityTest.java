@@ -19,52 +19,43 @@ public class EnsureCapacityTest {
 
         customArrayList.ensureCapacity(5);
 
-        assertEquals(10, customArrayList.getElementData().length);
-    }
-
-    @Test
-    public void ensureCapacity_whenMinCapacityEqualsOldCapacity_shouldNotChangeCapacity() {
-
-        customArrayList.ensureCapacity(10);
-        assertEquals(10, customArrayList.getElementData().length);
+        assertEquals(16, customArrayList.getCapacity());
     }
 
     @Test
     public void ensureCapacity_whenMinCapacityGreaterThanOldCapacity_shouldIncreaseCapacity() {
 
-        customArrayList.ensureCapacity(15);
-        assertEquals(16, customArrayList.getElementData().length);
+        customArrayList.ensureCapacity(18);
+        assertEquals(25, customArrayList.getCapacity());
     }
 
     @Test
-    public void ensureCapacity_whenMinCapacityLessThanOldCapacityAndOldCapacityLessThanMinCapacity_shouldIncreaseCapacity() {
+    public void ensureCapacity_whenMinCapacityMoreThanOldCapacityAndOldCapacityLessThanMinCapacity_shouldIncreaseCapacity() {
 
-        customArrayList.ensureCapacity(5);
-        customArrayList.add(1);
-
-        customArrayList.ensureCapacity(15);
-
-        assertEquals(22, customArrayList.getElementData().length);
+        MyArrayList<Integer> list = new MyArrayList<>(2);
+        Integer[] elements = {5, 10, 15};
+        list.addAll(elements);
+        assertEquals(4, list.getCapacity());
     }
 
     @Test
-    public void ensureCapacity_whenMinCapacityEqualsOldCapacityAndOldCapacityLessThanMinCapacity_shouldIncreaseCapacity() {
+    public void ensureCapacity_whenMinCapacityEqualsOldCapacityAndOldCapacityLessThanMinCapacity_shouldNotChangeCapacity() {
 
         customArrayList.ensureCapacity(5);
         customArrayList.add(1);
-        customArrayList.ensureCapacity(10);
+        customArrayList.ensureCapacity(16);
 
-        assertEquals(16, customArrayList.getElementData().length);
+        assertEquals(16, customArrayList.getCapacity());
     }
 
     @Test
     public void ensureCapacity_whenMinCapacityGreaterThanOldCapacityAndOldCapacityLessThanMinCapacity_shouldIncreaseCapacity() {
-        CustomArrayList<Integer> list = new CustomArrayList<>();
+        MyArrayList<Integer> list = new MyArrayList<>();
         customArrayList.ensureCapacity(5);
         customArrayList.add(1);
 
         customArrayList.ensureCapacity(20);
 
-        assertEquals(21, customArrayList.getElementData().length);
+        assertEquals(25, customArrayList.getCapacity());
     }
 }
