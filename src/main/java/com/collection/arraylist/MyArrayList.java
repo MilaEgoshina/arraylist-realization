@@ -11,9 +11,26 @@ import lombok.Getter;
  */
 @Getter
 public class MyArrayList<E> implements CustomList<E>{
+
+    /**
+     * The default initial capacity of the array list, its initialize the array with the default array length.
+     */
     private static final int DEFAULT_CAPACITY = 16;
+
+    /**
+     * The array that stores the elements of the list
+     */
     private Object[] elementData;
+
+    /**
+     * The number of elements currently stored in the list
+     */
     private int size;
+
+    /**
+     * The total capacity of the list, which determine how much is the length of current array and how many elements array
+     * can accept
+     */
     private int capacity;
 
     /**

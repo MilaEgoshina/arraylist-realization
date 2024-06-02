@@ -2,8 +2,21 @@ package com.collection.arraylist;
 
 import java.util.Comparator;
 
+/**
+ * This class represents a generic implementation of the Quick Sort algorithm.
+ * It is capable of sorting elements of any type that extends the Comparable interface.
+ *
+ * @param <T> the type of elements that this QuickSort class can sort
+ */
 public class QuickSort<T extends Comparable<T>> {
 
+    /**
+     * Method to sort the elements in the given CustomArrayList using the Quick Sort algorithm.
+     *
+     * @param <T> the type of elements that this QuickSort class can sort
+     * @param arrayList the CustomArrayList to be sorted
+     * @param comparator the comparator to determine the order of the elements
+     */
     public static <T> void sort(MyArrayList<T> arrayList, Comparator<T> comparator){
 
         if(arrayList == null || arrayList.size() == 0){
@@ -12,6 +25,15 @@ public class QuickSort<T extends Comparable<T>> {
         quickSort(arrayList,0,arrayList.size() - 1, comparator);
     }
 
+    /**
+     * Recursively performs the Quick Sort algorithm on the CustomArrayList based on the comparator.
+     *
+     * @param <T> the type of elements that this QuickSort class can sort
+     * @param arrayList the CustomArrayList to be sorted
+     * @param low the starting index of the sublist to be sorted
+     * @param high the ending index of the sublist to be sorted
+     * @param comparator the comparator to determine the order of the elements
+     */
     private static <T> void quickSort(MyArrayList<T> arrayList, int low, int high,
                                   Comparator<? super T> comparator){
         // if low is more than high, then the subarray contains one element or less and no sorting is required.
@@ -22,6 +44,16 @@ public class QuickSort<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Partitions the sublist in the CustomArrayList based on the comparator and returns the index of the pivot element.
+     *
+     * @param <T> the type of elements that this QuickSort class can sort
+     * @param arrayList the CustomArrayList containing the sublist to be partitioned
+     * @param low the starting index of the sublist to be partitioned
+     * @param high the ending index of the sublist to be partitioned
+     * @param comparator the comparator to determine the order of the elements
+     * @return the index of the pivot element after partitioning
+     */
     private static <T> int partition(MyArrayList<T> arrayList, int low, int high,
                                      Comparator<? super T> comparator){
 
