@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EnsureCapacityTest {
 
-    private  MyArrayList<Integer> customArrayList;
+    private CustomArrayList<Integer> customArrayList;
 
     @BeforeEach
     public void setUp(){
-        customArrayList = new MyArrayList<>();
+        customArrayList = new CustomArrayList<>();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class EnsureCapacityTest {
     @Test
     public void ensureCapacity_whenMinCapacityMoreThanOldCapacityAndOldCapacityLessThanMinCapacity_shouldIncreaseCapacity() {
 
-        MyArrayList<Integer> list = new MyArrayList<>(2);
+        CustomArrayList<Integer> list = new CustomArrayList<>(2);
         Integer[] elements = {5, 10, 15};
         list.addAll(elements);
         assertEquals(4, list.getCapacity());
@@ -50,7 +50,7 @@ public class EnsureCapacityTest {
 
     @Test
     public void ensureCapacity_whenMinCapacityGreaterThanOldCapacityAndOldCapacityLessThanMinCapacity_shouldIncreaseCapacity() {
-        MyArrayList<Integer> list = new MyArrayList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         customArrayList.ensureCapacity(5);
         customArrayList.add(1);
 

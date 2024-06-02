@@ -17,7 +17,7 @@ public class QuickSort<T extends Comparable<T>> {
      * @param arrayList the CustomArrayList to be sorted
      * @param comparator the comparator to determine the order of the elements
      */
-    public static <T> void sort(MyArrayList<T> arrayList, Comparator<T> comparator){
+    public static <T> void sort(CustomArrayList<T> arrayList, Comparator<T> comparator){
 
         if(arrayList == null || arrayList.size() == 0){
             return;
@@ -34,8 +34,8 @@ public class QuickSort<T extends Comparable<T>> {
      * @param high the ending index of the sublist to be sorted
      * @param comparator the comparator to determine the order of the elements
      */
-    private static <T> void quickSort(MyArrayList<T> arrayList, int low, int high,
-                                  Comparator<? super T> comparator){
+    private static <T> void quickSort(CustomArrayList<T> arrayList, int low, int high,
+                                      Comparator<? super T> comparator){
         // if low is more than high, then the subarray contains one element or less and no sorting is required.
         if(low < high){
             int pivotIndex = partition(arrayList, low, high, comparator);
@@ -54,7 +54,7 @@ public class QuickSort<T extends Comparable<T>> {
      * @param comparator the comparator to determine the order of the elements
      * @return the index of the pivot element after partitioning
      */
-    private static <T> int partition(MyArrayList<T> arrayList, int low, int high,
+    private static <T> int partition(CustomArrayList<T> arrayList, int low, int high,
                                      Comparator<? super T> comparator){
 
         int middle = low + (high - low) / 2;

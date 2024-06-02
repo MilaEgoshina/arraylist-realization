@@ -10,7 +10,7 @@ import lombok.Getter;
  * @param <E> the type of elements stored in the list
  */
 @Getter
-public class MyArrayList<E> implements CustomList<E>{
+public class CustomArrayList<E> implements CustomList<E>{
 
     /**
      * The default initial capacity of the array list, its initialize the array with the default array length.
@@ -34,20 +34,20 @@ public class MyArrayList<E> implements CustomList<E>{
     private int capacity;
 
     /**
-     * Constructs an instance of MyArrayList with the default capacity.
+     * Constructs an instance of CustomArrayList with the default capacity.
      */
-    public MyArrayList(){
+    public CustomArrayList(){
         capacity = DEFAULT_CAPACITY;
         elementData = new Object[capacity];
         size = 0;
     }
 
     /**
-     * Constructs an instance of MyArrayList with the specified capacity.
+     * Constructs an instance of CustomArrayList with the specified capacity.
      *
      * @param capacity the initial capacity of the list
      */
-    public MyArrayList(int capacity){
+    public CustomArrayList(int capacity){
 
         this.capacity = capacity;
         elementData = new Object[capacity];

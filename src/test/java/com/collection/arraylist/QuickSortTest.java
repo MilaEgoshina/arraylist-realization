@@ -8,11 +8,11 @@ import java.util.Comparator;
 import static org.junit.jupiter.api.Assertions.*;
 public class QuickSortTest {
 
-    private  MyArrayList <Integer> customArrayList;
+    private CustomArrayList<Integer> customArrayList;
 
     @BeforeEach
     public void setUp(){
-        customArrayList = new MyArrayList<>();
+        customArrayList = new CustomArrayList<>();
     }
 
     @Test
@@ -32,21 +32,21 @@ public class QuickSortTest {
     @Test
     public void testSortStringArray() {
 
-        MyArrayList<String> stringMyArrayList = new MyArrayList<>();
-        stringMyArrayList.add("zebra");
-        stringMyArrayList.add("dog");
-        stringMyArrayList.add("cat");
-        stringMyArrayList.add("elephant");
-        QuickSort.sort(stringMyArrayList, Comparator.naturalOrder());
-        assertEquals("cat", stringMyArrayList.get(0));
-        assertEquals("dog", stringMyArrayList.get(1));
-        assertEquals("elephant", stringMyArrayList.get(2));
-        assertEquals("zebra", stringMyArrayList.get(3));
+        CustomArrayList<String> stringCustomArrayList = new CustomArrayList<>();
+        stringCustomArrayList.add("zebra");
+        stringCustomArrayList.add("dog");
+        stringCustomArrayList.add("cat");
+        stringCustomArrayList.add("elephant");
+        QuickSort.sort(stringCustomArrayList, Comparator.naturalOrder());
+        assertEquals("cat", stringCustomArrayList.get(0));
+        assertEquals("dog", stringCustomArrayList.get(1));
+        assertEquals("elephant", stringCustomArrayList.get(2));
+        assertEquals("zebra", stringCustomArrayList.get(3));
     }
 
     @Test
     public void testSortCustomObjectArray() {
-        MyArrayList<Person> arrayList = new MyArrayList<>();
+        CustomArrayList<Person> arrayList = new CustomArrayList<>();
 
         Person person1 = new Person(2,"Bob");
         Person person2 = new Person(3,"Darry");
