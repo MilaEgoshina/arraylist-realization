@@ -83,6 +83,9 @@ QuickSort.sort(customArrayList,Comparator.naturalOrder());
 
 Unit tests for both the `CustomArrayList` and `QuickSort` classes can be found in the `src/test` directory. JUnit 5 is used for writing and running the tests. Each test follows the given-when-then structure to ensure clarity and correctness of the tests.
 
+### Code Coverage: 
+![code-coverage](images/coverage.jpg)
+
 ## Given-When-Then Structure
 
 When writing unit tests using JUnit, it is good practice to follow the Given-When-Then structure to organize your test cases. This structure helps in clearly defining the setup (Given), execution (When), and verification (Then) phases of your test cases.
