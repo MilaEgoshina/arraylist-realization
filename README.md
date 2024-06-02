@@ -14,13 +14,13 @@ git clone https://github.com/MilaEgoshina/arraylist-realization
 
 3. Create a new instance of CustomArrayList:
 
-```java
+```
 CustomArrayList<Integer> list = new CustomArrayList<>();
 ```
 
 4. Add elements to the list:
 
-```java
+```
 list.add(5);
 list.add(3);
 list.add(8);
@@ -69,7 +69,7 @@ The `QuickSort` class provides an implementation of the QuickSort algorithm to s
 
 To use the `QuickSort` algorithm, you can create an instance of the class and call the `sort` method like this:
 
-```java
+```
 CustomArrayList<Integer> customArrayList = new CustomArrayList<>();
 
 customArrayList.add(3);
@@ -89,7 +89,7 @@ When writing unit tests using JUnit, it is good practice to follow the Given-Whe
 
 An example of the Given-When-Then structure in a test case:
 
-```java
+```
 @Test
 void testAddElement() {
     // Given
