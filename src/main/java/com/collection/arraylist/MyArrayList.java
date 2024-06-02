@@ -182,6 +182,14 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return null;
     }
+
+    /**
+     * Method which returns the index of the first occurrence of the specified element in this list,
+     * or -1 if this list does not contain the element.
+     *
+     * @param elem the element to search for
+     * @return the index of the specified element in this list, or -1 if not found
+     */
     @Override
     public int indexOf(E elem) {
 
@@ -192,11 +200,22 @@ public class MyArrayList<E> implements CustomList<E>{
         }
         return -1;
     }
+
+    /**
+     * Removes all of the elements from this list. The list will be empty after this call.
+     */
     @Override
     public void clear() {
         elementData = new Object[10];
         size = 0;
     }
+
+    /**
+     * Method which returns a string representation of this list. The string representation consists of a list of
+     * the elements enclosed in square brackets ("[]"), separated by commas and spaces.
+     *
+     * @return a string representation of this list
+     */
     @Override
     public String toString(){
         if(size ==0){
@@ -210,6 +229,13 @@ public class MyArrayList<E> implements CustomList<E>{
         sb.append(elementData[size - 1]).append("]");
         return sb.toString();
     }
+
+    /**
+     * Method to increase the capacity of this CustomArrayList instance, if necessary, to ensure that it can hold at least
+     * the number of elements specified by the minimum capacity argument.
+     *
+     * @param minCapacity the desired minimum capacity of this CustomArrayList.
+     */
     public void ensureCapacity(int minCapacity) {
         int oldCapacity = elementData.length;
         if (minCapacity > oldCapacity) {
@@ -221,12 +247,26 @@ public class MyArrayList<E> implements CustomList<E>{
             System.arraycopy(oldData, 0, elementData, 0, size);
         }
     }
+
+    /**
+     * Method to check if the given index is within the bounds of the list.
+     *
+     * @param index the index to check
+     * @throws IndexOutOfBoundsException if the index is more than size of array or if index is less than zero.
+     * @return true if the index is more than zero and less than array size, false otherwise
+     */
     private boolean checkIndex(int index){
         if ((index > size) || (index < 0)){
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);
         }
         return true;
     }
+
+    /**
+     * Method which removes the element at the specified index in this list.
+     *
+     * @param index the index of the element to be removed
+     */
     private void removeAtIndex(int index){
 
         if(checkIndex(index)){
@@ -237,6 +277,14 @@ public class MyArrayList<E> implements CustomList<E>{
             elementData[--size] = null;
         }
     }
+
+    /**
+     * Method to check if the provided element is valid (not null).
+     *
+     * @param element the element to check
+     * @throws IllegalArgumentException if the element is null
+     * @return true if the element is null, false otherwise
+     */
     private boolean isValidElement(E element){
         if(element == null){
             throw new IllegalArgumentException("Null elements are not allowed");
