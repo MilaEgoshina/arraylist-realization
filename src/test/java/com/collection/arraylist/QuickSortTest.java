@@ -16,13 +16,15 @@ public class QuickSortTest {
     }
 
     @Test
-    public void testSortIntArray() {
+    public void testSortIntArrayWithComparator() {
 
         customArrayList.add(3);
         customArrayList.add(1);
         customArrayList.add(5);
         customArrayList.add(2);
+
         QuickSort.sort(customArrayList,Comparator.naturalOrder());
+
         assertEquals(1, (int) customArrayList.get(0));
         assertEquals(2, (int) customArrayList.get(1));
         assertEquals(3, (int) customArrayList.get(2));
@@ -30,14 +32,16 @@ public class QuickSortTest {
     }
 
     @Test
-    public void testSortStringArray() {
+    public void testSortStringArrayWithComparator() {
 
         CustomArrayList<String> stringCustomArrayList = new CustomArrayList<>();
         stringCustomArrayList.add("zebra");
         stringCustomArrayList.add("dog");
         stringCustomArrayList.add("cat");
         stringCustomArrayList.add("elephant");
+
         QuickSort.sort(stringCustomArrayList, Comparator.naturalOrder());
+
         assertEquals("cat", stringCustomArrayList.get(0));
         assertEquals("dog", stringCustomArrayList.get(1));
         assertEquals("elephant", stringCustomArrayList.get(2));
@@ -45,7 +49,7 @@ public class QuickSortTest {
     }
 
     @Test
-    public void testSortCustomObjectArray() {
+    public void testSortCustomObjectArrayWithComparator() {
         CustomArrayList<Person> arrayList = new CustomArrayList<>();
 
         Person person1 = new Person(2,"Bob");
@@ -56,7 +60,9 @@ public class QuickSortTest {
         arrayList.add(person2);
         arrayList.add(person3);
         arrayList.add(person4);
+
         QuickSort.sort(arrayList, Comparator.comparing(Person::getName));
+
         assertEquals(person4, arrayList.get(0));
         assertEquals(person1, arrayList.get(1));
         assertEquals(person2, arrayList.get(2));
@@ -64,19 +70,46 @@ public class QuickSortTest {
     }
 
     @Test
-    public void testSortEmptyArray() {
+    public void testSortEmptyArrayWithComparator() {
 
         QuickSort.sort(customArrayList, Comparator.naturalOrder());
         assertEquals(0, customArrayList.size());
     }
 
     @Test
-    public void testSortSingleElementArray() {
+    public void testSortSingleElementArrayWithComparator() {
 
         customArrayList.add(7);
         QuickSort.sort(customArrayList, Comparator.naturalOrder());
         assertEquals(7, (int) customArrayList.get(0));
     }
+
+    @Test
+    public void testSortEmptyListWithComparable() {
+
+        QuickSort.sort(customArrayList);
+        assertEquals(0, customArrayList.size());
+    }
+
+    @Test
+    public void testSortMultipleElementListWithComparable() {
+
+        customArrayList.add(5);
+        customArrayList.add(3);
+        customArrayList.add(8);
+        customArrayList.add(1);
+        customArrayList.add(6);
+
+        QuickSort.sort(customArrayList);
+
+        assertEquals(5, customArrayList.size());
+        assertEquals(1, customArrayList.get(0).intValue());
+        assertEquals(3, customArrayList.get(1).intValue());
+        assertEquals(5, customArrayList.get(2).intValue());
+        assertEquals(6, customArrayList.get(3).intValue());
+        assertEquals(8, customArrayList.get(4).intValue());
+    }
+    
 
      class Person {
         private int id;
