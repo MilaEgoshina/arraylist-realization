@@ -109,9 +109,29 @@ public class QuickSortTest {
         assertEquals(6, customArrayList.get(3).intValue());
         assertEquals(8, customArrayList.get(4).intValue());
     }
-    
 
-     class Person {
+    @Test
+    public void testSortCustomObjectArrayWithComparable() {
+        CustomArrayList<Person> arrayList = new CustomArrayList<>();
+
+        Person person1 = new Person(2,"Bob");
+        Person person2 = new Person(3,"Darry");
+        Person person3 = new Person(4,"Kate");
+        Person person4 = new Person(1,"Alice");
+        arrayList.add(person1);
+        arrayList.add(person2);
+        arrayList.add(person3);
+        arrayList.add(person4);
+
+        QuickSort.sort(arrayList);
+
+        assertEquals(person4, arrayList.get(0));
+        assertEquals(person1, arrayList.get(1));
+        assertEquals(person2, arrayList.get(2));
+        assertEquals(person3, arrayList.get(3));
+    }
+
+     class Person implements Comparable<Person>{
         private int id;
         private String name;
 
@@ -128,5 +148,11 @@ public class QuickSortTest {
         public String toString() {
             return "Person {" + id + ", " + name + "}";
         }
-    }
+
+         @Override
+         public int compareTo(Person otherPerson) {
+             return this.getName().compareTo(otherPerson.getName());
+         }
+     }
+
 }
